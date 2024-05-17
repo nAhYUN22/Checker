@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List</title>
+    <style>
+        #event-list {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            list-style-type: none;
+        }
+        .event-item {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        #search-bar {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            width: 100%;
+            max-width: 600px;
+            font-size: 16px;
+        }
+        .event-item img {
+            max-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 이벤트 검색 -->
+    <input type="text" id="search-bar" placeholder="Search events...">
+    
+    <!-- 이벤트 리스트 출력 -->
+    <ul id="event-list"></ul>
+    <script src="script.js"></script>
+</body>
+</html>
