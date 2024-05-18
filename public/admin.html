@@ -3,24 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Manage Events</title>
-    <link rel="stylesheet" href="admin.css" />
+    <title> Admin Page </title>
+    <style>
+        button {
+            cursor: pointer;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .event-item {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            padding: 10px;
+            position: relative;
+        }
+        .event-item button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .event-item img {
+            max-width: 150px;
+            max-height: 150px;
+        }
+        #edit-btn{
+            cursor: pointer;
+        }
+        #search-bar {
+            display: block;
+            margin: 50px auto;
+            padding: 10px;
+            max-width: 500px;
+            font-size: 15x;
+        }
+        #event-list-title{
+            margin: 0 auto;
+            font-size: 20px;
+            padding: 10px;
+            width: max-content;
+        }
+        #event-list{
+            font-size: small;
+            max-width: 500px;
+            list-style-type: none;
+            margin: 0 auto;
+        }
+        #event-progress{
+            margin: 5px;
+            vertical-align:middle ;
+            width: 20px;
+            height: 20px;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+        }
+        .option-item input {
+            margin-right: 10px;
+        }
+        #submit-btn {
+            padding: 10px;
+            font-size: 20px;
+            display :inline-block;
+        }
+    </style>
 </head>
 <body>
     <form id="event-form" enctype="multipart/form-data">
         <h2 id="form-title">Add Event</h2>
+        
         <input type="hidden" name="id" id="event-id">
         <input type="text" name="num" id="event-num" placeholder="Event Number" required>
         <input type="text" name="name" id="event-name" placeholder="Event Name" required>
-        <input type="text" name="progress" id="event-progress" placeholder="Progress" required>
+        <label>
+            Progress: (If on, check)
+            <input type="checkbox" name="progress" id="event-progress">
+        </label>
         <textarea name="content" id="event-content" placeholder="Content" required></textarea>
-        <input type="date" name="duedate" id="event-duedate" placeholder="Due Date" required>
-        <input type="file" name="image" id="event-image" required>
+        <input type="datetime-local" name="duedate" id="event-duedate" placeholder="Due Date" required>
+        <input type="file" name="image" id="event-image">
         <input type="text" name="studentList" id="event-studentList" placeholder="Student List (comma separated)" required>
-        <button type="submit">Submit</button>
+        <button type="button" id="add-option">Add Option</button>
+        <div id="options-container"></div>
+        <hr>
+        <button type="submit" id="submit-btn">Submit</button>
     </form>
 
-    <ul id="event-list"></ul>
+    <input type="text" id="search-bar" placeholder="Search Events...">
+    
+    <h3 id="event-list-title"> Event Lists </h3>
+    <div id="event-list"></div>
 
     <script src="admin.js"></script>
 </body>

@@ -38,13 +38,8 @@ const saveData = (data) => {
     fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2), 'utf8'); // 객체를 JSON 문자열로 변환하여 파일에 저장
 };
 
-// 기본 경로
+// 기본 경로를 관리자 페이지로 설정
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html')); // 기본 페이지 전송
-});
-
-// 관리 페이지 경로
-app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html')); // 관리자 페이지 전송
 });
 
@@ -89,15 +84,23 @@ app.get('/api/events/:id', (req, res) => {
 // 이벤트 추가 API
 app.post('/api/events', upload.single('image'), (req, res) => {
     const data = readData(); // 이벤트 데이터를 읽어옴
+    let options = [];
+    try {
+        options = JSON.parse(req.body.options); // JSON 문자열을 배열로 변환하여 옵션 리스트로 저장
+    } catch (error) {
+        console.error('Error parsing options:', error);
+        options = []; // 파싱 오류 시 빈 배열로 초기화
+    }
     const newEvent = {
         id: data.length + 1, // 새로운 이벤트 ID
         name: req.body.name, // 이벤트 이름
         num: req.body.num, // 이벤트 번호
-        progress: req.body.progress, // 진행 상태
+        progress: req.body.progress === 'true', // 진행 상태 (체크박스 값이 문자열로 전달되므로 'true'로 비교)
         content: req.body.content, // 내용
         duedate: req.body.duedate, // 종료 날짜
         image: req.file ? `/uploads/${req.file.filename}` : '', // 이미지 경로
-        studentList: req.body.studentList.split(',') // 학생 리스트 (콤마로 구분된 문자열을 배열로 변환)
+        studentList: req.body.studentList.split(','), // 학생 리스트 (콤마로 구분된 문자열을 배열로 변환)
+        options: options // 옵션 리스트
     };
     data.push(newEvent); // 새로운 이벤트를 데이터에 추가
     saveData(data); // 데이터를 파일에 저장
@@ -111,15 +114,23 @@ app.put('/api/events/:id', upload.single('image'), (req, res) => {
     const eventIndex = data.findIndex(event => event.id === eventId); // ID에 해당하는 이벤트 인덱스 찾기
 
     if (eventIndex !== -1) {
+        let options = [];
+        try {
+            options = JSON.parse(req.body.options); // JSON 문자열을 배열로 변환하여 옵션 리스트로 저장
+        } catch (error) {
+            console.error('Error parsing options:', error);
+            options = []; // 파싱 오류 시 빈 배열로 초기화
+        }
         data[eventIndex] = {
             ...data[eventIndex], // 기존 이벤트 데이터 유지
             name: req.body.name, // 수정된 이름
             num: req.body.num, // 수정된 번호
-            progress: req.body.progress, // 수정된 진행 상태
+            progress: req.body.progress === 'true', // 수정된 진행 상태 (체크박스 값이 문자열로 전달되므로 'true'로 비교)
             content: req.body.content, // 수정된 내용
             duedate: req.body.duedate, // 수정된 종료 날짜
             image: req.file ? `/uploads/${req.file.filename}` : data[eventIndex].image, // 수정된 이미지 경로
-            studentList: req.body.studentList.split(',') // 수정된 학생 리스트
+            studentList: req.body.studentList.split(','), // 수정된 학생 리스트
+            options: options // 수정된 옵션 리스트
         };
         saveData(data); // 데이터를 파일에 저장
         res.status(200).json(data[eventIndex]); // 수정된 이벤트를 JSON으로 응답

@@ -1,21 +1,30 @@
 [
   {
     "id": 1,
-    "name": "asdasd간식사업",
+    "name": "단과대 간식사업",
     "num": "1",
     "progress": "on",
-    "content": "간식 사업 내용 수정",
-    "duedate": "2024-06-08",
+    "content": "간식 사업 내용 수정 수정",
+    "duedate": "2024-05-18T13:00",
     "image": "/uploads/1715936951028-cat.jfif",
     "studentList": [
       "학생1",
-      "    학생2",
-      "    학생3"
+      " 학생2",
+      " 학생3"
+    ],
+    "options": [
+      {
+        "category": "간식",
+        "items": [
+          "간식1",
+          "간식2"
+        ]
+      }
     ]
   },
   {
     "id": 2,
-    "name": "축제",
+    "name": "축제 출입명단 관리",
     "num": "2",
     "progress": "on",
     "content": "축제 내용",
@@ -23,8 +32,8 @@
     "image": "/uploads/1715934099348-cat.jfif",
     "studentList": [
       "학생4",
-      "  학생5",
-      "  학생6"
+      "학생5",
+      "학생6"
     ]
   },
   {
@@ -37,8 +46,8 @@
     "image": "",
     "studentList": [
       "학생4",
-      " 학생5",
-      " 학생6"
+      "학생5",
+      "학생6"
     ]
   },
   {
@@ -46,26 +55,64 @@
     "name": "event4",
     "num": "4",
     "progress": "on",
-    "content": "ㅇㅇ",
+    "content": "",
     "duedate": "2024-05-31",
-    "image": "/uploads/1715934123131-cat.jfif",
+    "image": "",
     "studentList": [
       "학생4",
-      " 학생5",
-      " 학생6"
+      "학생5",
+      "학생6"
     ]
   },
   {
     "id": 5,
-    "name": "s",
-    "num": "d",
+    "name": "event5",
+    "num": "5",
     "progress": "on",
-    "content": "dd",
+    "content": "",
     "duedate": "2024-05-21",
-    "image": "/uploads/1715936928500-cat.jfif",
+    "image": "",
     "studentList": [
       "이나현",
-      " 조예진"
+      "조예진"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "이벤트명",
+    "num": "1",
+    "progress": "on",
+    "content": "냉용",
+    "duedate": "2024-05-24",
+    "image": "",
+    "studentList": [
+      "1",
+      "2",
+      "3"
+    ],
+    "options": []
+  },
+  {
+    "id": 7,
+    "name": "과학생회 간식사업",
+    "num": "335",
+    "progress": true,
+    "content": "ㅇㅇ",
+    "duedate": "2024-05-19T12:00",
+    "image": "",
+    "studentList": [
+      "학생1",
+      " 학생2",
+      " 학생3"
+    ],
+    "options": [
+      {
+        "category": "간식종류",
+        "items": [
+          "간식1",
+          "간식2"
+        ]
+      }
     ]
   }
 ]
