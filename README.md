@@ -47,6 +47,7 @@
   - http://118.34.232.178/login
     - ID : checker
     - PW : checkerpw
+  - http://118.34.232.178/admin 페이지 로그인 시에만 보임 : )
 -  프로젝트 구조 변경
   - `ejs` 사용
   - `components` 디렉토리에 모든 페이지 관리
