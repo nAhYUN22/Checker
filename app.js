@@ -4,14 +4,24 @@ const path = require('path');
 const multer = require('multer');
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'components'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const session = require('express-session');
+app.use(session({
+    secret: 'ChoLeeKimSeok',
+    resave: false,
+    saveUninitialized: true
+}));
+
+
 // 정적 파일 제공 설정
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // 데이터 파일 경로
 const dataFilePath = path.join(__dirname, 'data', 'events.json');
@@ -38,9 +48,9 @@ const saveData = (data) => {
     fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2), 'utf8'); // 객체를 JSON 문자열로 변환하여 파일에 저장
 };
 
-// 기본 경로를 관리자 페이지로 설정
+// 기본 경로를 유저 페이지로 설정
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin.html')); // 관리자 페이지 전송
+    res.render('user.ejs'); // 유저페이지 렌더링
 });
 
 // 이벤트 목록 API (페이징 처리 및 검색 기능 추가)
@@ -51,7 +61,7 @@ app.get('/api/events', (req, res) => {
     const search = req.query.search || '';
 
     // 검색 기능
-    const filteredData = data.filter(event => 
+    const filteredData = data.filter(event =>
         event.name.toLowerCase().includes(search.toLowerCase())
     );
 
@@ -93,13 +103,13 @@ app.post('/api/events', upload.single('image'), (req, res) => {
     }
     const newEvent = {
         id: data.length + 1,
-        name: req.body.name, 
-        num: req.body.num, 
+        name: req.body.name,
+        num: req.body.num,
         progress: req.body.progress === 'true',
-        content: req.body.content, 
-        duedate: req.body.duedate, 
+        content: req.body.content,
+        duedate: req.body.duedate,
         image: req.file ? `/uploads/${req.file.filename}` : '',
-        studentList: req.body.studentList.split(','), 
+        studentList: req.body.studentList.split(','),
         options: options
     };
     data.push(newEvent);
@@ -122,14 +132,14 @@ app.put('/api/events/:id', upload.single('image'), (req, res) => {
             options = []; // 파싱 오류 시 빈 배열로 초기화
         }
         data[eventIndex] = {
-            ...data[eventIndex], 
-            name: req.body.name, 
-            num: req.body.num, 
-            progress: req.body.progress === 'true', 
+            ...data[eventIndex],
+            name: req.body.name,
+            num: req.body.num,
+            progress: req.body.progress === 'true',
             content: req.body.content,
             duedate: req.body.duedate,
             image: req.file ? `/uploads/${req.file.filename}` : data[eventIndex].image,
-            studentList: req.body.studentList.split(','), 
+            studentList: req.body.studentList.split(','),
             options: options
         };
         saveData(data);
@@ -138,6 +148,60 @@ app.put('/api/events/:id', upload.single('image'), (req, res) => {
         res.status(404).json({ message: 'Event not found' }); // 이벤트를 찾을 수 없을때
     }
 });
+
+
+
+
+
+
+
+
+// =============== 로그인 기능 24-05-20 석지원 추가 ==========================
+
+
+// 로그아웃
+app.get('/logut', (req, res, next) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+});
+
+
+// 로그인 검증
+app.post('/auth', (req, res, next) => {
+    let post = req.body;
+
+    let admin_id = post.admin_id;
+    let admin_pw = post.admin_pw;
+
+    if (admin_id == "checker" && admin_pw == "checkerpw") {
+        req.session.is_logined = true;
+        req.session.save(() => {
+            res.redirect('/admin');
+        });
+    } else {
+        res.redirect('/login');
+    }
+});
+
+// 로그인 성공 시에만 관리자페이지 로드
+app.get('/admin', function (req, res) {
+    if (req.session.is_logined == true) {
+        res.render('admin.ejs');
+    } else {
+        res.redirect('/login');
+    }
+})
+
+// 로그인 페이지 렌더링
+app.get('/login', function (req, res) {
+    res.render('login.ejs');
+})
+
+
+// =============== 로그인 기능 24-05-20 석지원 추가 ==========================
+
+
 
 // 서버 시작
 app.listen(port, () => {

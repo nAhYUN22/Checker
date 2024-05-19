@@ -1,0 +1,382 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+@font-face {
+    font-family: 'AJou';
+    src: url(AjouTTF.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+* {
+    font-family: "Pretendard Variable";
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color: white;
+}
+body::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: #2A64AD;
+    border-radius: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==== floating ==== */
+
+.floating {
+  position: fixed;
+  bottom: 35px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  z-index: 98;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.floating.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.floating > a > .gotoTop {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 60px;
+    color: black;
+    background: #4c7bba;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating > a > .gotoCall {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating > a > .gotoKakao {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: rgb(224, 224, 224);
+}
+
+.floating > a > .gotoUrl {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #a5a5a5;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating > a > .gotoKakao > img {
+  width: 100%;
+}
+
+.floating > a > .gotoCall > img {
+  width: 100%;
+}
+
+.floating > a > .gotoTop > img {
+  width: 20px;
+}
+
+.floating > a > .gotoUrl > img {
+  width: 20px;
+}
+
+/* ==== floating ==== */
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+section {
+    width: 100%;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+section > .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+main > .topBox {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #2A64AD;
+  padding: 15px 0;
+  z-index: 9999;
+  transition: all 0.3s;
+  gap: 2rem;
+  justify-content: space-between;
+}
+main > .topBox.sticky {
+    background-color: #2a64add9;
+    padding: 18px 0;
+    backdrop-filter: blur(10px);
+}
+main > .topBox > .left {
+  margin-left: 30px;
+}
+main > .topBox > .left > p {
+  font-family: 'Ajou';
+  color: white;
+  font-size: 25px;
+  margin: 0;
+  cursor: pointer;
+  font-style: italic;
+  transition: all 0.3s;
+}
+main > .topBox > .left > p:hover {
+  color: rgb(130, 184, 238);
+}
+main > .topBox > .right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-right: 30px;
+}
+main > .topBox > .right > p {
+  font-family: 'Pretendard Variable';
+  color: white;
+  font-size: 20px;
+  margin: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+main > .topBox > .right > p:hover {
+  color: rgb(130, 184, 238);
+}
+
+/* ==== section1 ==== */
+
+#section1 {
+}
+
+#section1 > .container {
+    padding: 50px 0;
+    padding-top: 130px;
+}
+
+#section1 > .container > .contentLine {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#section1 > .container > .contentLine > .text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+}
+#section1 > .container > .contentLine > .text > p {
+    font-family: "Pretendard-Variable";
+    margin: 0;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+#section1 > .container > .contentLine > .imgBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#section1 > .container > .contentLine > .imgBox > .imgLine {
+    border: 1px solid rgb(141, 140, 140);
+    border-radius: 10px;
+    width: 500px;
+}
+#section1 > .container > .contentLine > .imgBox > .imgLine > img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#section1 > .container > .contentLine > .formLine {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+#section1 > .container > .contentLine > .formLine > form {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox > p {
+    font-size: 25px;
+    font-family: "Pretendard-Variable";
+    margin: 0;
+    font-weight: 500;
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox > input {
+    width: calc(100% - 3px);
+    border: 1px solid rgb(181, 181, 181);
+    height: 30px;
+    border-radius: 10px;
+    font-size: 17px;
+    padding: 10px 15px;
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox > input[type='file'] {
+    border: none;
+    font-size: 15px;
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox > label {
+
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox > input[type='file']::file-selector-button {
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: white;
+    transition: all 0.3s;
+    margin-right: 20px;
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox > input[type='file']::file-selector-button:hover {
+    background-color: whitesmoke;
+}
+#section1 > .container > .contentLine > .formLine > form > .inputBox > textarea {
+    width: 100%;
+    height: 300px;
+    resize: none;
+    font-size: 20px;
+    border: 1px solid rgb(181, 181, 181);
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+/* ==== section1 ==== */
+
+/* ==== section2 ==== */
+
+#section2 {
+}
+
+#section2 > .container {
+}
+
+/* ==== section2 ==== */
+
+/* ==== section3 ==== */
+
+#section3 {
+}
+
+#section3 > .container {
+}
+
+/* ==== section3 ==== */
+
+
+/* ===== media ===== */
+
+@media all and (max-width: 1600px) {
+}
+
+@media all and (max-width: 1440px) {
+}
+
+@media all and (max-width: 1280px) {
+}
+
+@media all and (max-width: 1024px) {
+}
+/* 작업 후 834까지 */
+@media all and (max-width: 767px) {
+  .popupWrapper {
+    left: calc(50% - 100px) !important;
+  }
+}
+/* 작업 후 600까지 */
+@media all and (max-width: 479px) {
+  .popupWrapper {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+/* 작업 후 478까지 */
+@media all and (max-width: 390px) {
+  .popupWrapper {
+    width: 360px !important;
+  }
+}
+/* 작업 후 414까지 */
+@media all and (max-width: 320px) {
+}
+
+/* ===== media ===== */

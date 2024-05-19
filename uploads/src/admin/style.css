@@ -1,0 +1,405 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+@font-face {
+    font-family: 'AJou';
+    src: url(AjouTTF.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+* {
+    font-family: "Pretendard Variable";
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color: white;
+}
+body::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: #2A64AD;
+    border-radius: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==== floating ==== */
+
+.floating {
+  position: fixed;
+  bottom: 35px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  z-index: 98;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.floating.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.floating > a > .gotoTop {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 60px;
+    color: black;
+    background: #4c7bba;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating > a > .gotoCall {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating > a > .gotoKakao {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: rgb(224, 224, 224);
+}
+
+.floating > a > .gotoUrl {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #a5a5a5;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating > a > .gotoKakao > img {
+  width: 100%;
+}
+
+.floating > a > .gotoCall > img {
+  width: 100%;
+}
+
+.floating > a > .gotoTop > img {
+  width: 20px;
+}
+
+.floating > a > .gotoUrl > img {
+  width: 20px;
+}
+
+/* ==== floating ==== */
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+section {
+    width: 100%;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+section > .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+main > .topBox {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #2A64AD;
+  padding: 15px 0;
+  z-index: 9999;
+  transition: all 0.3s;
+  gap: 2rem;
+  justify-content: space-between;
+}
+main > .topBox.sticky {
+    background-color: #2a64add9;
+    padding: 18px 0;
+    backdrop-filter: blur(10px);
+}
+main > .topBox > .left {
+  margin-left: 30px;
+}
+main > .topBox > .left > p {
+  font-family: 'Ajou';
+  color: white;
+  font-size: 25px;
+  margin: 0;
+  cursor: pointer;
+  font-style: italic;
+  transition: all 0.3s;
+}
+main > .topBox > .left > p:hover {
+  color: rgb(130, 184, 238);
+}
+main > .topBox > .right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-right: 30px;
+}
+main > .topBox > .right > p {
+  font-family: 'Pretendard Variable';
+  color: white;
+  font-size: 20px;
+  margin: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+main > .topBox > .right > p:hover {
+  color: rgb(130, 184, 238);
+}
+
+/* ==== section1 ==== */
+
+#section1 {
+}
+
+#section1 > .container {
+    padding: 50px 0;
+    padding-top: 130px;
+}
+
+#section1 > .container > .contentLine {
+
+}
+#section1 > .container > .contentLine > .boxList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+#section1 > .container > .contentLine > .boxList > .box {
+    display: flex;
+    width: 400px;
+    height: 350px;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px 1px #00000066;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+#section1 > .container > .contentLine > .boxList > .box:hover {
+    transform: scale(1.02);
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .top {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid rgb(202, 202, 202);
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .top > img {
+    width: 100%;
+    position: absolute;
+    top: -10px;
+    transition: all 0.3s;
+}
+
+#section1 > .container > .contentLine > .boxList > .box:hover > .boxContent > .top > img {
+    transform: scale(1.1);
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom{
+    width: 100%;
+}
+
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .topLine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .topLine > p {
+    margin: 0;
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .topLine > p.eName {
+    font-weight: 700;
+    font-size: 20px;
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .topLine > p.dateTime {
+    font-size: 15px;
+    color: gray;
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .bottomLine {
+    
+}
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .bottomLine > .contentPreview {
+    
+}
+
+#section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .bottomLine > .contentPreview > p {
+    display: -webkit-box;   
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+}
+
+#section1 > .container > .contentLine > .boxList > .box > .hoverBox {
+    
+}
+#section1 > .container > .contentLine > .findLine {
+  position: fixed;
+  top: 80px;
+  right: 30px;
+}
+#section1 > .container > .contentLine > .findLine > input {
+  width: 300px;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #3A63A8;
+  border-radius: 50px;
+  padding: 10px 20px;
+}
+#section1 > .container > .contentLine > .btnLine  {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+#section1 > .container > .contentLine > .btnLine > button {
+  width: 300px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  transition: all 0.3s;
+}
+#section1 > .container > .contentLine > .btnLine > button:hover {
+  background-color: rgb(164, 164, 164);
+  color: black;
+}
+/* ==== section1 ==== */
+
+/* ==== section2 ==== */
+
+#section2 {
+}
+
+#section2 > .container {
+}
+
+/* ==== section2 ==== */
+
+/* ==== section3 ==== */
+
+#section3 {
+}
+
+#section3 > .container {
+}
+
+/* ==== section3 ==== */
+
+
+/* ===== media ===== */
+
+@media all and (max-width: 1600px) {
+}
+
+@media all and (max-width: 1440px) {
+}
+
+@media all and (max-width: 1280px) {
+}
+
+@media all and (max-width: 1024px) {
+}
+/* 작업 후 834까지 */
+@media all and (max-width: 767px) {
+  .popupWrapper {
+    left: calc(50% - 100px) !important;
+  }
+}
+/* 작업 후 600까지 */
+@media all and (max-width: 479px) {
+  .popupWrapper {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+/* 작업 후 478까지 */
+@media all and (max-width: 390px) {
+  .popupWrapper {
+    width: 360px !important;
+  }
+}
+/* 작업 후 414까지 */
+@media all and (max-width: 320px) {
+}
+
+/* ===== media ===== */

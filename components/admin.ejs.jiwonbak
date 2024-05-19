@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Admin Page </title>
+    <link rel="stylesheet" href="uploads/src/admin/style.css">
+</head>
+<body>
+    <form id="event-form" enctype="multipart/form-data">
+        <h2 id="form-title">Add Event</h2>
+        
+        <input type="hidden" name="id" id="event-id">
+        <input type="text" name="num" id="event-num" placeholder="Event Number" required>
+        <input type="text" name="name" id="event-name" placeholder="Event Name" required>
+        <label>
+            Progress: (If on, check)
+            <input type="checkbox" name="progress" id="event-progress">
+        </label>
+        <textarea name="content" id="event-content" placeholder="Content" required></textarea>
+        <input type="datetime-local" name="duedate" id="event-duedate" placeholder="Due Date" required>
+        <input type="file" name="image" id="event-image">
+        <input type="text" name="studentList" id="event-studentList" placeholder="Student List (comma separated)" required>
+        <button type="button" id="add-option">Add Option</button>
+        <div id="options-container"></div>
+        <hr>
+        <button type="submit" id="submit-btn">Submit</button>
+    </form>
+
+    <input type="text" id="search-bar" placeholder="Search Events...">
+    
+    <h3 id="event-list-title"> Event Lists </h3>
+    <div id="event-list"></div>
+
+    <script src="uploads/src/admin/script.js"></script>
+</body>
+</html>
