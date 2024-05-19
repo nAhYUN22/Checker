@@ -6,6 +6,7 @@ const multer = require('multer');
 const app = express();
 const port = 5000;
 
+// ejs 엔진 및 로그인 세션 라이브러리 로드 및 적용
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'components'));
 app.use(express.json());
@@ -184,7 +185,7 @@ app.post('/auth', (req, res, next) => {
     }
 });
 
-// 로그인 성공 시에만 관리자페이지 로드
+// 로그인 성공 시에만 관리자 페이지 로드
 app.get('/admin', function (req, res) {
     if (req.session.is_logined == true) {
         res.render('admin.ejs');
