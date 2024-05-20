@@ -2,9 +2,14 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const db = require('./lib/db.js');
 
 const app = express();
 const port = 5000;
+
+
+// db 접속
+const checkerDB = new db();
 
 // ejs 엔진 및 로그인 세션 라이브러리 로드 및 적용
 app.set('view engine', 'ejs');
@@ -186,7 +191,7 @@ app.post('/auth', (req, res, next) => {
 });
 
 // 로그인 성공 시에만 관리자 페이지 로드
-app.get('/admin', function (req, res) {
+app.get('/admin', (req, res) => {
     if (req.session.is_logined == true) {
         res.render('admin.ejs');
     } else {
@@ -195,12 +200,22 @@ app.get('/admin', function (req, res) {
 })
 
 // 로그인 페이지 렌더링
-app.get('/login', function (req, res) {
+app.get('/login', (req, res) => {
     res.render('login.ejs');
 })
 
 
 // =============== 로그인 기능 24-05-20 석지원 추가 ==========================
+
+// =============== 쿼리 실행 24-05-20 석지원 추가 ==========================
+
+app.get('/dbtest', async (req, res) => {
+    const result = await checkerDB.sendQuery('SELECT * FROM student;');
+    res.send(result);
+})
+
+
+// =============== 쿼리 실행 24-05-20 석지원 추가 ==========================
 
 
 

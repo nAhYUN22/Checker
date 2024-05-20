@@ -52,8 +52,15 @@
   - `ejs` 사용
   - `components` 디렉토리에 모든 페이지 관리
   - `uploads` 디렉토리에 `css`, `js` 파일 관리 및 로드 (예진이가 구현한 `app.js` 이미지 로드 로직 수정 필요함)
+- 쿼리 실행 함수 작성 완료.
+  - `lib/db.js`
+  - 사용방법 : `const 결과 = wait checkerDB.sendQuery(쿼리);`
+  - 테스트페이지 : http://118.34.232.178/dbtest
 
 
 
 
-
+## 계정
+- **ROOT** : rhdqndyd123
+- **DB** : checker / checker123
+- **ADMIN** : checker / checkerpw
