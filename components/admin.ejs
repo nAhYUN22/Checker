@@ -3,104 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Admin Page </title>
-    <style>
-        button {
-            cursor: pointer;
-        }
-        form {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-        }
-        input, textarea {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .event-item {
-            border: 1px solid #ccc;
-            margin: 10px 0;
-            padding: 10px;
-            position: relative;
-        }
-        .event-item button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .event-item img {
-            max-width: 150px;
-            max-height: 150px;
-        }
-        #edit-btn{
-            cursor: pointer;
-        }
-        #search-bar {
-            display: block;
-            margin: 50px auto;
-            padding: 10px;
-            max-width: 500px;
-            font-size: 15x;
-        }
-        #event-list-title{
-            margin: 0 auto;
-            font-size: 20px;
-            padding: 10px;
-            width: max-content;
-        }
-        #event-list{
-            font-size: small;
-            max-width: 500px;
-            list-style-type: none;
-            margin: 0 auto;
-        }
-        #event-progress{
-            margin: 5px;
-            vertical-align:middle ;
-            width: 20px;
-            height: 20px;
-        }
-        .option-item {
-            display: flex;
-            align-items: center;
-        }
-        .option-item input {
-            margin-right: 10px;
-        }
-        #submit-btn {
-            padding: 10px;
-            font-size: 20px;
-            display :inline-block;
-        }
-    </style>
+    <title>CHECKER 관리자 페이지</title>
+    
+
+<link rel="stylesheet" href="uploads/src/admin/add.css" />
 </head>
 <body>
-    <form id="event-form" enctype="multipart/form-data">
-        <h2 id="form-title">Add Event</h2>
-        
-        <input type="hidden" name="id" id="event-id">
-        <input type="text" name="num" id="event-num" placeholder="Event Number" required>
-        <input type="text" name="name" id="event-name" placeholder="Event Name" required>
-        <label>
-            Progress: (If on, check)
-            <input type="checkbox" name="progress" id="event-progress">
-        </label>
-        <textarea name="content" id="event-content" placeholder="Content" required></textarea>
-        <input type="datetime-local" name="duedate" id="event-duedate" placeholder="Due Date" required>
-        <input type="file" name="image" id="event-image">
-        <input type="text" name="studentList" id="event-studentList" placeholder="Student List (comma separated)" required>
-        <button type="button" id="add-option">Add Option</button>
-        <div id="options-container"></div>
-        <hr>
-        <button type="submit" id="submit-btn">Submit</button>
-    </form>
+      <main>
 
-    <input type="text" id="search-bar" placeholder="Search Events...">
-    
-    <h3 id="event-list-title"> Event Lists </h3>
-    <div id="event-list"></div>
+        <div class="topBox">
+            <div class="left">
+                <p class="home" onclick="location.href='./';">CHECKER</p>
+            </div>
+            <div class="right">
+                <p class="logout" onclick="location.href='/logut';">로그아웃</p>
+            </div>
+            
+          </div>
+
+        <section id="section1">
+            <div class="container">
+                <div class="contentLine">
+                    <div class="text">
+                        <p class="h1">이벤트 추가</p>
+                    </div>
+                    <div class="imgBox">
+                        <div class="imgLine">
+                            <img src="" alt="">
+                        </div>
+                        
+                    </div>
+                    <div class="formLine">
+                        <form id="event-form" enctype="multipart/form-data">
+                            <input type="hidden" name="id" id="event-id" required>
+                            <input type="text" name="num" id="event-num" placeholder="Event Number 요건 어떤거야?" required>
+                            <input type="text" name="name" id="event-name" placeholder="이벤트 명" required>
+                            <label>
+                                Progress: (If on, check) 
+                                <input type="checkbox" name="progss" id="event-progress"><- 이거 어떤거야?
+                            </label>
+                            <textarea name="content" id="event-content" placeholder="이벤트 이름" required></textarea>
+                            <input type="datetime-local" name="duedate" id="event-duedate" placeholder="Due Date" required>
+                            <input type="file" name="image" id="event-image" required>
+                            <input type="text" name="studentList" id="event-studentList" placeholder="학생 명단 (,로 구분해주세요)" required>
+                            <button type="button" id="add-option">옵션 추가</button>
+                            <div id="options-container"></div>
+
+                            <div class="submitLine">
+                                <button type="submit" id="submit-btn">이벤트 등록</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </section>
+
+          <section id="section2">
+            <div class="container">
+                <div class="contentLine">
+                    
+                    <h3 id="event-list-title"> 이벤트 목록 </h3>
+                    <div class="eventFinder">
+                        <input type="text" id="search-bar" placeholder="이벤트 이름을 입력해주세요.">
+                    </div>
+                    <div id="event-list"></div>
+                </div>
+            </div>
+          </section>
+      </main>
 
     <script src="uploads/src/admin/script.js"></script>
 </body>

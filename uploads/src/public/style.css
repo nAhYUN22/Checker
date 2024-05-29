@@ -225,12 +225,12 @@ main > .topBox > p {
 }
 
 #section1 > .container > .contentLine > .boxList > .box > .boxContent > .top {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-    border: 2px solid rgb(202, 202, 202);
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 10px;
+  border: 2px solid rgb(202, 202, 202);
 }
 #section1 > .container > .contentLine > .boxList > .box > .boxContent > .top > img {
     width: 100%;

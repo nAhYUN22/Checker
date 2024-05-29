@@ -15,12 +15,30 @@ const addOption = (category = '', items = '') => {
     const optionItem = document.createElement('div');
     optionItem.className = 'option-item';
     optionItem.innerHTML = `
-        <input type="text" name="optionCategory[]" placeholder="Option Category" value="${category}" required>
-        <input type="text" name="optionItems[]" placeholder="Option Items (comma separated)" value="${items}" required>
-        <button type="button" onclick="removeOption(this)">Remove</button>
+        <input type="text" name="optionCategory[]" placeholder="이벤트 옵션 이름" value="${category}" required>
+        <input type="text" name="optionItems[]" placeholder="내용" value="${items}" required>
+        <button type="button" onclick="removeOption(this)">옵션 제거</button>
     `;
     optionsContainer.appendChild(optionItem);
 };
+
+
+// 업로드한 이미지 프리뷰 이벤트 등록
+const imagePreview = () => {
+    const fileDOM = document.querySelector('#section1 > .container > .contentLine > .formLine > form > input#event-image');
+    const preview = document.querySelector('#section1 > .container > .contentLine > .imgBox > .imgLine > img');
+
+    fileDOM.addEventListener('change', () => {
+    const reader = new FileReader();
+    reader.onload = ({ target }) => {
+        preview.src = target.result;
+    };
+    reader.readAsDataURL(fileDOM.files[0]);
+    });
+}
+
+
+
 
 // 옵션 제거 함수
 const removeOption = (button) => {
@@ -38,6 +56,22 @@ const loadEvents = async (page, limit, search) => {
 };
 
 // 이벤트 목록을 렌더링하는 함수
+
+const studentListRendering = (studentList) => {
+    const students = studentList;
+
+    let frame = "";
+    students.forEach(student => {
+        frame += `
+<div class="studentInfo">
+        <p>${student}</p>
+</div>
+        `
+    })
+
+    return frame;
+}
+
 const renderEvents = (events, clear = false) => {
     if (clear) {
         eventList.innerHTML = ''; // 기존 목록을 지우기
@@ -47,14 +81,18 @@ const renderEvents = (events, clear = false) => {
         eventItem.className = 'event-item';
         eventItem.innerHTML = `
             <h2>${event.name}</h2>
-            <p>ID: ${event.num}</p>
-            <p>Progress: ${event.progress ? 'True' : 'False'}</p>
-            <p>Due Date: ${new Date(event.duedate).toLocaleString()}</p>
-            <p>Image: <img src="${event.image}" alt="${event.name}" /></p>
-            <p>Students: ${event.studentList.join(', ')}</p>
-            <b>Additional Options</b>
+            <div class="infoLine">
+                <p>이벤트 ID: ${event.num}</p>
+                <p>Progress: ${event.progress ? 'True' : 'False'}</p>
+                <p>종료일: ${new Date(event.duedate).toLocaleString()}</p>
+            </div>
+            <p><img src="${event.image}" alt="${event.name}" /></p>
+            <div class="studentList">
+                ${studentListRendering(event.studentList)}
+            </div>
+            <b>이벤트 옵션</b>
             <p>${event.options ? event.options.map(opt => `${opt.category}: ${opt.items.join(', ')}`).join('; ') : ''}</p>
-            <button onclick="editEvent(${event.id})">Edit</button>
+            <button onclick="editEvent(${event.id})">수정하기</button>
         `;
         eventList.appendChild(eventItem);
     });
@@ -90,13 +128,14 @@ const editEvent = async (id) => {
         document.getElementById('event-duedate').value = event.duedate.slice(0, 16); // "2024-05-14T12:00" 형식으로 설정
         document.getElementById('event-studentList').value = event.studentList.join(', ');
 
+        document.querySelector('#section1 > .container > .contentLine > .imgBox > .imgLine > img').src = event.image;
+
         // 옵션 필드 초기화 후 다시 추가
         optionsContainer.innerHTML = '';
         if (event.options) {
             event.options.forEach(option => addOption(option.category, option.items.join(', ')));
         }
 
-        formTitle.innerText = 'Edit Event';
         editingEventId = id;
     }
 };
@@ -148,3 +187,5 @@ window.addEventListener('scroll', handleScroll);
 
 // 초기 옵션 필드 추가
 addOption();
+
+imagePreview();

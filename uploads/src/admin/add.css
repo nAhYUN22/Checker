@@ -245,13 +245,12 @@ main > .topBox > .right > p:hover {
     justify-content: center;
 }
 #section1 > .container > .contentLine > .imgBox > .imgLine {
-    border: 1px solid rgb(141, 140, 140);
-    border-radius: 10px;
     width: 500px;
 }
 #section1 > .container > .contentLine > .imgBox > .imgLine > img {
     width: 100%;
     border-radius: 10px;
+    border: 1px solid rgb(141, 140, 140);
 }
 
 #section1 > .container > .contentLine > .formLine {
@@ -263,32 +262,30 @@ main > .topBox > .right > p:hover {
     margin-top: 30px;
 }
 #section1 > .container > .contentLine > .formLine > form {
-    width: 65%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 2rem;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  border: 1px solid gray;
+  padding: 30px;
 }
-#section1 > .container > .contentLine > .formLine > form > .inputBox {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-#section1 > .container > .contentLine > .formLine > form > .inputBox > p {
-    font-size: 25px;
-    font-family: "Pretendard-Variable";
-    margin: 0;
-    font-weight: 500;
-}
-#section1 > .container > .contentLine > .formLine > form > .inputBox > input {
-    width: calc(100% - 3px);
+
+#section1 > .container > .contentLine > .formLine > form > input {
+    width: 90%;
     border: 1px solid rgb(181, 181, 181);
     height: 30px;
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 15px;
+}
+#section1 > .container > .contentLine > .formLine > form > textarea {
+  width: 90%;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 10px;
+  font-size: 17px;
+  padding: 10px 15px;
 }
 #section1 > .container > .contentLine > .formLine > form > .inputBox > input[type='file'] {
     border: none;
@@ -297,86 +294,241 @@ main > .topBox > .right > p:hover {
 #section1 > .container > .contentLine > .formLine > form > .inputBox > label {
 
 }
-#section1 > .container > .contentLine > .formLine > form > .inputBox > input[type='file']::file-selector-button {
-    width: 100px;
+#section1 > .container > .contentLine > .formLine > form > input[type='file']::file-selector-button {
+    width: 80px;
     height: 30px;
-    border: 1px solid black;
-    border-radius: 30px;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 5px;
     cursor: pointer;
     background-color: white;
     transition: all 0.3s;
     margin-right: 20px;
+    font-size: 13px;
 }
-#section1 > .container > .contentLine > .formLine > form > .inputBox > input[type='file']::file-selector-button:hover {
+#section1 > .container > .contentLine > .formLine > form > input[type='file']::file-selector-button:hover {
     background-color: whitesmoke;
 }
-#section1 > .container > .contentLine > .formLine > form > .inputBox > textarea {
-    width: 100%;
-    height: 300px;
-    resize: none;
-    font-size: 20px;
-    border: 1px solid rgb(181, 181, 181);
-    border-radius: 10px;
-    padding: 10px 15px;
+#section1 > .container > .contentLine > .formLine > form > #options-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#section1 > .container > .contentLine > .formLine > form > #options-container > .option-item {
+  width: 96%;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 10px;
+  font-size: 17px;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 25px 0;
+  margin-bottom: 10px;
+}
+
+
+
+#section1 > .container > .contentLine > .formLine > form > #options-container > .option-item > input {
+  width: 80%;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 10px;
+  height: 30px;
+  padding: 5px 20px;
+  
+}
+
+#section1 > .container > .contentLine > .formLine > form > #options-container > .option-item > button {
+  width: 100px;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 10px;
+  background-color: #2A64AD;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  align-self: center;
+  font-size: 15px;
+}
+#section1 > .container > .contentLine > .formLine > form > #options-container > .option-item > button:hover {
+  background-color: #154988;
+}
+
+
+#section1 > .container > .contentLine > .formLine > form > .submitLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#section1 > .container > .contentLine > .formLine > form  > button#add-option {
+  width: 100px;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 10px;
+  background-color: #2A64AD;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  align-self: center;
+  font-size: 15px;
+  margin: -10px 0;
+}
+
+#section1 > .container > .contentLine > .formLine > form  > button#add-option:hover {
+  background-color: #154988;
+}
+
+#section1 > .container > .contentLine > .formLine > form > .submitLine > button {
+  width: 200px;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 20px;
+  background-color: #2A64AD;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 21px;
+}
+#section1 > .container > .contentLine > .formLine > form > .submitLine > button:hover {
+  background-color: #154988;
 }
 /* ==== section1 ==== */
 
 /* ==== section2 ==== */
 
 #section2 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #section2 > .container {
+  width: 800px;
 }
 
+#section2 > .container > .contentLine {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#section2 > .container > .contentLine > h3#event-list-title {
+  font-family: "Pretendard-Variable";
+  margin: 0;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+#section2 > .container > .contentLine > .eventFinder {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#section2 > .container > .contentLine > .eventFinder > input {
+  width: 50%;
+  height: 30px;
+  font-size: 20px;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
+
+#section2 > .container > .contentLine > #event-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 30px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid gray;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+#section2 > .container > .contentLine > #event-list > .event-item > p {
+  margin: 0;
+  font-size: 20px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .infoLine {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .infoLine > p {
+  margin: 0;
+  font-size: 20px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > p > img {
+  width: 400px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList {
+  width: 100%;
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid gray;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList::-webkit-scrollbar {
+  width: 7px;
+  background-color: white;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList::-webkit-scrollbar-thumb {
+  width: 7px;
+  background-color: #154988;
+  border-radius: 30px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .studentInfo {
+  margin-left: 20px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .studentInfo > p {
+  font-size: 17px;
+  margin: 10px 0;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: #2b67b0;
+  transition: all 0.3s;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > button:hover {
+  background-color: #154988;
+}
 /* ==== section2 ==== */
 
-/* ==== section3 ==== */
-
-#section3 {
-}
-
-#section3 > .container {
-}
-
-/* ==== section3 ==== */
-
-
-/* ===== media ===== */
-
-@media all and (max-width: 1600px) {
-}
-
-@media all and (max-width: 1440px) {
-}
-
-@media all and (max-width: 1280px) {
-}
-
-@media all and (max-width: 1024px) {
-}
-/* 작업 후 834까지 */
-@media all and (max-width: 767px) {
-  .popupWrapper {
-    left: calc(50% - 100px) !important;
-  }
-}
-/* 작업 후 600까지 */
-@media all and (max-width: 479px) {
-  .popupWrapper {
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-  }
-}
-/* 작업 후 478까지 */
-@media all and (max-width: 390px) {
-  .popupWrapper {
-    width: 360px !important;
-  }
-}
-/* 작업 후 414까지 */
-@media all and (max-width: 320px) {
-}
-
-/* ===== media ===== */
