@@ -170,7 +170,6 @@ eventForm.addEventListener('submit', async (event) => {
     const newEvent = await response.json();
     loadEvents(1, limit, searchQuery).then(data => renderEvents(data.data, true));
     eventForm.reset();
-    formTitle.innerText = 'Add Event';
     editingEventId = null;
     optionsContainer.innerHTML = ''; // 옵션 필드 초기화
     addOption(); // 기본 옵션 필드 추가

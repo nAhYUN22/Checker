@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const db = require('./lib/db.js');
+const crypto = require('crypto');
 
 const app = express();
 const port = 5000;
@@ -118,9 +119,18 @@ app.post('/api/events', upload.single('image'), (req, res) => {
         studentList: req.body.studentList.split(','),
         options: options
     };
-    data.push(newEvent);
-    saveData(data);
-    res.status(201).json(newEvent); // 생성된 이벤트를 JSON으로 응답
+
+
+    let eventHash = crypto.createHash('sha256').update(newEvent['name'] + newEvent['content'] + newEvent['duedate']).digest('hex');
+    // 이벤트 등록 쿼리
+    checkerDB.sendQuery(`INSERT INTO checker.events (event_name, event_hash, event_status, event_date, remain_count) VALUES ("${newEvent['name']}", "${eventHash}", ${newEvent['progress']}, "${newEvent['duedate']}", "${newEvent['num']}");`);
+
+    // 이벤트 옵션 등록 쿼리
+    checkerDB.sendQuery(`INSERT INTO checker.event_additional_info (event_hash, options) VALUES ('${eventHash}', '${JSON.stringify(newEvent['options'])}');`);
+
+    // data.push(newEvent);
+    // saveData(data);
+    // res.status(201).json(newEvent); // 생성된 이벤트를 JSON으로 응답
 });
 
 // 이벤트 수정 API
