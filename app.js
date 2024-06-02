@@ -56,9 +56,7 @@ const saveData = (data) => {
 };
 
 // 기본 경로를 유저 페이지로 설정
-app.get('/', (req, res) => {
-    res.render('user.ejs'); // 유저페이지 렌더링
-});
+
 
 // 이벤트 목록 API (페이징 처리 및 검색 기능 추가)
 app.get('/api/events', (req, res) => {
@@ -121,16 +119,17 @@ app.post('/api/events', upload.single('image'), (req, res) => {
     };
 
 
+
+
+
+
     let eventHash = crypto.createHash('sha256').update(newEvent['name'] + newEvent['content'] + newEvent['duedate']).digest('hex');
     // 이벤트 등록 쿼리
-    checkerDB.sendQuery(`INSERT INTO checker.events (event_name, event_hash, event_status, event_date, remain_count) VALUES ("${newEvent['name']}", "${eventHash}", ${newEvent['progress']}, "${newEvent['duedate']}", "${newEvent['num']}");`);
+    checkerDB.sendQuery(`INSERT INTO checker.events (event_name, event_hash, event_image_url, event_content, event_status, event_date, remain_count, remain_origin) VALUES ("${newEvent['name']}", "${eventHash}", "${newEvent['image']}", "${newEvent['content']}", ${newEvent['progress']}, "${newEvent['duedate']}", "${newEvent['num']}", "${newEvent['num']}");`);
 
     // 이벤트 옵션 등록 쿼리
     checkerDB.sendQuery(`INSERT INTO checker.event_additional_info (event_hash, options) VALUES ('${eventHash}', '${JSON.stringify(newEvent['options'])}');`);
 
-    // data.push(newEvent);
-    // saveData(data);
-    // res.status(201).json(newEvent); // 생성된 이벤트를 JSON으로 응답
 });
 
 // 이벤트 수정 API
@@ -227,6 +226,34 @@ app.get('/dbtest', async (req, res) => {
 
 // =============== 쿼리 실행 24-05-20 석지원 추가 ==========================
 
+
+// 유저 페이지 리스트
+
+app.post('/api/userList', async (req, res) => {
+    let userList = await checkerDB.sendQuery('SELECT * FROM events');
+
+    res.json(userList);
+})
+
+
+app.get('/eventView/:eventHash', async (req, res) => {
+
+    let userList = await checkerDB.sendQuery(`SELECT * FROM checker.events a INNER JOIN checker.event_additional_info WHERE a.event_hash="${req.params.eventHash}"`);
+
+    console.log(userList);
+
+
+    res.render('eventView.ejs', { eventInfo: userList });
+});
+
+
+
+
+app.get('/', async (req, res) => {
+    res.render('user.ejs'); // 유저페이지 렌더링
+});
+
+// 유저 페이지 리스트
 
 
 // 서버 시작
