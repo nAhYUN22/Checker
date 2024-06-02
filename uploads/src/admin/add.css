@@ -472,9 +472,9 @@ main > .topBox > .right > p:hover {
 #section2 > .container > .contentLine > #event-list > .event-item > .infoLine {
   width: 95%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: space-around;
   margin: 10px 0;
 }
@@ -493,6 +493,9 @@ main > .topBox > .right > p:hover {
   height: 200px;
   overflow-y: scroll;
   border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #section2 > .container > .contentLine > #event-list > .event-item > .studentList::-webkit-scrollbar {
@@ -513,6 +516,42 @@ main > .topBox > .right > p:hover {
 #section2 > .container > .contentLine > #event-list > .event-item > .studentList > .studentInfo > p {
   font-size: 17px;
   margin: 10px 0;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .hoverInfo {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  transition: all 0.3s;
+  padding: 10px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.533);
+}
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .hoverInfo > img {
+  width: 200px;
+}
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student:hover > .hoverInfo {
+  opacity: 1;
+  z-index: 11;
+}
+
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .stuInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 #section2 > .container > .contentLine > #event-list > .event-item > button {

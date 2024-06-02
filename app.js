@@ -45,9 +45,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // 데이터를 파일에서 읽어오는 함수
-const readData = () => {
-    const data = fs.readFileSync(dataFilePath, 'utf8');
-    return JSON.parse(data); // JSON 문자열을 JavaScript 객체로 변환
+const readData = async () => {
+    const result = await checkerDB.sendQuery('SELECT * FROM student;');
+    return result;
 };
 
 // 데이터를 파일에 저장하는 함수
@@ -97,7 +97,7 @@ app.get('/api/events/:id', (req, res) => {
 });
 
 // 이벤트 추가 API
-app.post('/api/events', upload.single('image'), (req, res) => {
+app.post('/api/events', upload.single('image'), async (req, res) => {
     const data = readData();
     let options = [];
     try {
@@ -119,16 +119,25 @@ app.post('/api/events', upload.single('image'), (req, res) => {
     };
 
 
+    let makeStudentform = ""
+    newEvent['studentList'].forEach(student => {
+        makeStudentform += `name="${student.replace(" ", "")}" OR `;
+    });
+    makeStudentform = makeStudentform.slice(0, -4);
 
-
-
+    let studentInfoResult = await checkerDB.sendQuery(`SELECT * FROM checker.student WHERE ${makeStudentform}`)
 
     let eventHash = crypto.createHash('sha256').update(newEvent['name'] + newEvent['content'] + newEvent['duedate']).digest('hex');
     // 이벤트 등록 쿼리
     checkerDB.sendQuery(`INSERT INTO checker.events (event_name, event_hash, event_image_url, event_content, event_status, event_date, remain_count, remain_origin) VALUES ("${newEvent['name']}", "${eventHash}", "${newEvent['image']}", "${newEvent['content']}", ${newEvent['progress']}, "${newEvent['duedate']}", "${newEvent['num']}", "${newEvent['num']}");`);
 
-    // 이벤트 옵션 등록 쿼리
+    // // 이벤트 옵션 등록 쿼리
     checkerDB.sendQuery(`INSERT INTO checker.event_additional_info (event_hash, options) VALUES ('${eventHash}', '${JSON.stringify(newEvent['options'])}');`);
+
+    // 학생 참여정보 테이블 등록
+    studentInfoResult.forEach(student => {
+        checkerDB.sendQuery(`INSERT INTO checker.participation_info (student_id, student_name, student_pic, participation, event_hash, enrolled, fee) VALUES ('${student['student_id']}', '${student['name']}', '${student['pic']}', '${newEvent['name']}', '${eventHash}', ${student['enrolled']}, ${student['fee']});`);
+    })
 
 });
 
@@ -229,16 +238,42 @@ app.get('/dbtest', async (req, res) => {
 
 // 유저 페이지 리스트
 
-app.post('/api/userList', async (req, res) => {
-    let userList = await checkerDB.sendQuery('SELECT * FROM events');
+app.post('/api/getEventName', async (req, res) => {
+    let userList = await checkerDB.sendQuery(`SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info WHERE a.event_name LIKE '%${req.body.userInput}%';`);
 
     res.json(userList);
 })
 
 
+app.post('/api/eventListView', async (req, res) => {
+    let userList = await checkerDB.sendQuery('SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info b ON a.event_hash = b.event_hash;');
+
+    res.json(userList);
+})
+
+app.post('/api/getParticipationInfo', async (req, res) => {
+    let userList = await checkerDB.sendQuery(`SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info b ON a.event_hash = b.event_hash INNER JOIN checker.participation_info WHERE a.event_hash="${req.body.event_hash}" AND enrolled=1 AND fee=1;`);
+
+    res.json(userList);
+})
+
+
+app.post('/api/userList', async (req, res) => {
+    let userList = await checkerDB.sendQuery('SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info b ON a.event_hash = b.event_hash WHERE event_status=1;');
+
+    res.json(userList);
+})
+
+app.post('/api/getEventHash', async (req, res) => {
+    let userList = await checkerDB.sendQuery(`SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info WHERE a.event_hash="${req.body.eventHash}";`);
+
+    res.json(userList);
+});
+
+
 app.get('/eventView/:eventHash', async (req, res) => {
 
-    let userList = await checkerDB.sendQuery(`SELECT * FROM checker.events a INNER JOIN checker.event_additional_info WHERE a.event_hash="${req.params.eventHash}"`);
+    let userList = await checkerDB.sendQuery(`SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info WHERE a.event_hash="${req.params.eventHash}"`);
 
     console.log(userList);
 

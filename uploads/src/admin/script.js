@@ -10,17 +10,6 @@ const limit = 10;
 let editingEventId = null;
 let searchQuery = '';
 
-// 옵션 추가 함수
-const addOption = (category = '', items = '') => {
-    const optionItem = document.createElement('div');
-    optionItem.className = 'option-item';
-    optionItem.innerHTML = `
-        <input type="text" name="optionCategory[]" placeholder="이벤트 옵션 이름" value="${category}" required>
-        <input type="text" name="optionItems[]" placeholder="내용" value="${items}" required>
-        <button type="button" onclick="removeOption(this)">옵션 제거</button>
-    `;
-    optionsContainer.appendChild(optionItem);
-};
 
 
 // 업로드한 이미지 프리뷰 이벤트 등록
@@ -29,11 +18,11 @@ const imagePreview = () => {
     const preview = document.querySelector('#section1 > .container > .contentLine > .imgBox > .imgLine > img');
 
     fileDOM.addEventListener('change', () => {
-    const reader = new FileReader();
-    reader.onload = ({ target }) => {
-        preview.src = target.result;
-    };
-    reader.readAsDataURL(fileDOM.files[0]);
+        const reader = new FileReader();
+        reader.onload = ({ target }) => {
+            preview.src = target.result;
+        };
+        reader.readAsDataURL(fileDOM.files[0]);
     });
 }
 
@@ -48,96 +37,211 @@ const removeOption = (button) => {
 // 옵션 추가 버튼 클릭 이벤트 리스너
 addOptionButton.addEventListener('click', () => addOption());
 
-// 이벤트 데이터를 서버에서 로드하는 함수
-const loadEvents = async (page, limit, search) => {
-    const response = await fetch(`/api/events?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`);
-    const data = await response.json();
-    return data;
-};
 
-// 이벤트 목록을 렌더링하는 함수
+// 초기 이벤트 로더
+const loadFirst = async () => {
+    let eventList = document.querySelector('#section2 > .container > .contentLine > #event-list');
 
-const studentListRendering = (studentList) => {
-    const students = studentList;
+    const response = await fetch("/api/eventListView", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    });
 
-    let frame = "";
-    students.forEach(student => {
-        frame += `
-<div class="studentInfo">
-        <p>${student}</p>
-</div>
-        `
-    })
+    let jsonResult = await response.json();
 
-    return frame;
-}
 
-const renderEvents = (events, clear = false) => {
-    if (clear) {
-        eventList.innerHTML = ''; // 기존 목록을 지우기
-    }
-    events.forEach(event => {
+    jsonResult.forEach(async (event) => {
+
+        const studentResponse = await fetch("/api/getParticipationInfo", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "event_hash": event['event_hash']
+            })
+        });
+    
+        let studentList = await studentResponse.json();
+
         const eventItem = document.createElement('li');
+        let optionList = JSON.parse(event['options']);
+        let optionInfo = "";
+        let studentMaker = ""
+
+        studentList.forEach(student => {
+            studentMaker += `
+            <div class="student">
+                <div class="hoverInfo">
+                    <div class="content">
+                        <img src="/uploads/src/studentPic/${student['student_pic']}" class="studentPic" />
+                    </div>
+                </div>
+                <div class="stuInfo">
+                    <p class="studnetId">학번 : ${student['student_id']}</p>
+                    <p class="studentName">이름 : ${student['student_name']}</p>
+                </div>
+            </div>
+            `
+        })
+
+        optionList.forEach(option => {
+            optionInfo += `${option['category']}: ${option['items'].join(", ")}
+            `
+        })
+
         eventItem.className = 'event-item';
         eventItem.innerHTML = `
-            <h2>${event.name}</h2>
+            <h2>${event['event_name']}</h2>
             <div class="infoLine">
-                <p>이벤트 ID: ${event.num}</p>
-                <p>Progress: ${event.progress ? 'True' : 'False'}</p>
-                <p>종료일: ${new Date(event.duedate).toLocaleString()}</p>
+                <p>이벤트 Hash<br> ${event['event_hash']}</p>
+                <p>Progress: ${event['event_status'] ? '활성화' : '비활성화'}</p>
+                <p>종료일: ${new Date(event['event_date']).toLocaleString()}</p>
             </div>
-            <p><img src="${event.image}" alt="${event.name}" /></p>
+            <p><img src="${event['event_image_url']}" alt="${event['event_name']}" /></p>
             <div class="studentList">
-                ${studentListRendering(event.studentList)}
+                ${studentMaker}
             </div>
             <b>이벤트 옵션</b>
-            <p>${event.options ? event.options.map(opt => `${opt.category}: ${opt.items.join(', ')}`).join('; ') : ''}</p>
-            <button onclick="editEvent(${event.id})">수정하기</button>
+            <p>${optionInfo}</p>
+            <button onclick="editEvent('${event['event_hash']}')">수정하기</button>
         `;
         eventList.appendChild(eventItem);
     });
-};
 
-// 무한 스크롤 이벤트 핸들러
-const handleScroll = async () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        page++;
-        const data = await loadEvents(page, limit, searchQuery);
-        renderEvents(data.data);
-    }
-};
 
-// 검색 입력 이벤트 핸들러
-const handleSearch = async (event) => {
-    searchQuery = event.target.value;
-    page = 1;
-    const data = await loadEvents(page, limit, searchQuery);
-    renderEvents(data.data, true);
+    
+
+}
+
+
+// 이벤트 목록 만들기
+const eventUpdate = async (data) => {
+    
+    let eventList = document.querySelector('#section2 > .container > .contentLine > #event-list');
+    eventList.replaceChildren();
+
+    let jsonResult = data;
+
+
+    jsonResult.forEach(async (event) => {
+
+        const studentResponse = await fetch("/api/getParticipationInfo", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "event_hash": event['event_hash']
+            })
+        });
+    
+        let studentList = await studentResponse.json();
+
+        const eventItem = document.createElement('li');
+        let optionList = JSON.parse(event['options']);
+        let optionInfo = "";
+        let studentMaker = ""
+
+        studentList.forEach(student => {
+            studentMaker += `
+            <div class="student">
+                <div class="hoverInfo">
+                    <div class="content">
+                        <img src="/uploads/src/studentPic/${student['student_pic']}" class="studentPic" />
+                    </div>
+                </div>
+                <div class="stuInfo">
+                    <p class="studnetId">학번 : ${student['student_id']}</p>
+                    <p class="studentName">이름 : ${student['student_name']}</p>
+                </div>
+            </div>
+            `
+        })
+
+        optionList.forEach(option => {
+            optionInfo += `${option['category']}: ${option['items'].join(", ")}
+            `
+        })
+
+        eventItem.className = 'event-item';
+        eventItem.innerHTML = `
+            <h2>${event['event_name']}</h2>
+            <div class="infoLine">
+                <p>이벤트 Hash<br> ${event['event_hash']}</p>
+                <p>Progress: ${event['event_status'] ? '활성화' : '비활성화'}</p>
+                <p>종료일: ${new Date(event['event_date']).toLocaleString()}</p>
+            </div>
+            <p><img src="${event['event_image_url']}" alt="${event['event_name']}" /></p>
+            <div class="studentList">
+                ${studentMaker}
+            </div>
+            <b>이벤트 옵션</b>
+            <p>${optionInfo}</p>
+            <button onclick="editEvent('${event['event_hash']}')">수정하기</button>
+        `;
+        eventList.appendChild(eventItem);
+    });
+
+
+
+    
+
+}
+
+// 옵션 추가 함수
+const addOption = (category = '', items = '') => {
+    const optionItem = document.createElement('div');
+    optionItem.className = 'option-item';
+    optionItem.innerHTML = `
+        <input type="text" name="optionCategory[]" placeholder="이벤트 옵션 이름" value="${category}" required>
+        <input type="text" name="optionItems[]" placeholder="내용" value="${items}" required>
+        <button type="button" onclick="removeOption(this)">옵션 제거</button>
+    `;
+    optionsContainer.appendChild(optionItem);
 };
 
 // 이벤트 수정 함수
-const editEvent = async (id) => {
-    const response = await fetch(`/api/events/${id}`);
-    const event = await response.json();
-    if (event) {
-        eventIdInput.value = event.id;
-        document.getElementById('event-num').value = event.num;
-        document.getElementById('event-name').value = event.name;
-        document.getElementById('event-progress').checked = event.progress;
-        document.getElementById('event-content').value = event.content;
-        document.getElementById('event-duedate').value = event.duedate.slice(0, 16); // "2024-05-14T12:00" 형식으로 설정
-        document.getElementById('event-studentList').value = event.studentList.join(', ');
+const editEvent = async (eventHash) => {
 
-        document.querySelector('#section1 > .container > .contentLine > .imgBox > .imgLine > img').src = event.image;
+    const response = await fetch("/api/getEventHash", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "eventHash": eventHash })
+    });
+
+    let jsonResult = await response.json();
+    jsonResult = jsonResult[0];
+
+    if (jsonResult) {
+        console.log(new Date(jsonResult['event_date']).toISOString());
+        document.getElementById('event-num').value = jsonResult['remain_origin'];
+        document.getElementById('event-name').value = jsonResult['event_name'];
+        document.getElementById('event-progress').checked = jsonResult['event_status'];
+        document.getElementById('event-content').value = jsonResult['event_content'];
+        document.getElementById('event-duedate').value = new Date(jsonResult['event_date']).toISOString().substring(0, 16);
+        // 학생 목록 업데이트 하기
+        // document.getElementById('event-studentList').jsonResult = event.studentList.join(', ');
+
+        document.querySelector('#section1 > .container > .contentLine > .imgBox > .imgLine > img').src = jsonResult['event_image_url'];
 
         // 옵션 필드 초기화 후 다시 추가
         optionsContainer.innerHTML = '';
-        if (event.options) {
-            event.options.forEach(option => addOption(option.category, option.items.join(', ')));
+        if (jsonResult['options']) {
+            let options = JSON.parse(jsonResult['options']);
+            console.log(options);
+            options.forEach(option => addOption(option['category'], option['items'].join(', ')));
         }
-
-        editingEventId = id;
     }
+
 };
 
 // 이벤트 폼 제출 이벤트 핸들러
@@ -166,25 +270,33 @@ eventForm.addEventListener('submit', async (event) => {
     const response = await fetch(url, {
         method,
         body: formData
+    }).then(() => {
+        window.location.reload();
     });
-    const newEvent = await response.json();
-    loadEvents(1, limit, searchQuery).then(data => renderEvents(data.data, true));
-    eventForm.reset();
-    editingEventId = null;
-    optionsContainer.innerHTML = ''; // 옵션 필드 초기화
-    addOption(); // 기본 옵션 필드 추가
 });
 
-// 초기 이벤트 로드
-loadEvents(page, limit, searchQuery).then(data => renderEvents(data.data, true));
 
 // 검색 입력 이벤트 리스너 추가
-searchBar.addEventListener('input', handleSearch);
+searchBar.addEventListener('input', async (event) => {
 
-// 무한 스크롤 이벤트 리스너 추가
-window.addEventListener('scroll', handleScroll);
+    let inputer = event.target.value;
+
+    const response = await fetch("/api/getEventName", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "userInput": inputer })
+    });
+
+    let jsonResult = await response.json();
+
+    eventUpdate(jsonResult);
+});
 
 // 초기 옵션 필드 추가
 addOption();
 
 imagePreview();
+loadFirst();

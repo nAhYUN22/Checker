@@ -1,113 +1,157 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJOU CHECKER</title>
-    <link rel="stylesheet" href="/uploads/src/public/eventView.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AJOU CHECKER</title>
+  <link rel="stylesheet" href="/uploads/src/public/eventView.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <main>
+    <div class="floating">
+      <a href="#section1">
+        <div class="gotoTop">
+          <img src="src/img/up-arrow.png" alt="" />
+        </div>
+      </a>
+    </div>
 
-  </head>
-  <body>
-    <main>
-      <div class="floating">
-        <a href="#section1">
-          <div class="gotoTop">
-            <img src="src/img/up-arrow.png" alt="" />
+    <div class="topBox">
+      <p class="projectName" onclick="location.href='/'">CHECKER</p>
+    </div>
+
+    <section id="section1">
+      <div class="container">
+        <div class="contentLine">
+          <div class="bgdLine">
+            <img src="<%= eventInfo[0].event_image_url %>" alt="">
           </div>
-        </a>
-      </div>
-
-      <div class="topBox">
-        <!-- <img src="" alt=""> -->
-        <p class="projectName" onclick="location.href='/'">CHECKER</p>
-      </div>
-
-      <section id="section1">
-        <div class="container">
-            <div class="contentLine">
-                <div class="bgdLine">
-                    <img src="<%= eventInfo[0]['event_image_url'] %>" alt="">
-                </div>
-                <div class="textLine">
-                    <p><%= eventInfo[0]['event_name'] %></p> 
-                </div>
-            </div>
+          <div class="textLine">
+            <p><%= eventInfo[0].event_name %></p>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="section2">
-        <div class="container">
-            <div class="contentLine">
-                <div class="timeLine" data-aos="fade-up">
-                    <div class="tLine">
-                        <p>남은 시간</p>
-                    </div>
-                    <div class="timeInfo">
-                        <div class="tBox">
-                            <div class="day">
-                                <p></p>
-                            </div>
-                            <p>일</p>
-                        </div>
-                       
-                        <div class="tBox">
-                            <div class="hour">
-                                <p></p>
-                            </div>
-                            <p>시간</p>
-                        </div>
-
-                        <div class="tBox">
-                            <div class="minute">
-                                <p></p>
-                            </div>
-                            <p>분</p>
-                        </div>
-
-                        <div class="tBox">
-                            <div class="second">
-                                <p></p>
-                            </div>
-                            <p>초</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="optional" >
-                    <p>잔여 수량 : <%= eventInfo[0]['remain_count'] %>개</p>
-                </div>
-
-                <div class="eventContent">
-                    <p><%= eventInfo[0]['event_content'] %></p>
-                </div>
-
-                <span style="display: none;" class="dueDate">
-                    <%= eventInfo[0]['event_date'] %>
-                </span>
+    <section id="section2">
+      <div class="container">
+        <div class="contentLine">
+          <div class="timeLine" data-aos="fade-up">
+            <div class="tLine">
+              <p>남은 시간</p>
             </div>
+            <div class="timeInfo">
+              <div class="tBox">
+                <div class="day">
+                  <p></p>
+                </div>
+                <p>일</p>
+              </div>
+              <div class="tBox">
+                <div class="hour">
+                  <p></p>
+                </div>
+                <p>시간</p>
+              </div>
+              <div class="tBox">
+                <div class="minute">
+                  <p></p>
+                </div>
+                <p>분</p>
+              </div>
+              <div class="tBox">
+                <div class="second">
+                  <p></p>
+                </div>
+                <p>초</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="optional">
+            <p>잔여 수량 : <span id="remain_count" data-remain-count="<%= eventInfo[0].remain_count %>"><%= eventInfo[0].remain_count %></span>개</p>
+            <span id="remain_origin" style="display:none;" data-remain-origin="<%= eventInfo[0].remain_origin %>"></span>
+          </div>
+
+          <!-- 차트 추가,0605 조예진 -->
+          <div class="chartContainer">
+            <canvas id="eventChart"></canvas>
+          </div>
+
+          <div class="eventContent">
+            <p><%= eventInfo[0].event_content %></p>
+          </div>
+
+          <span style="display: none;" class="dueDate">
+            <%= eventInfo[0].event_date %>
+          </span>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
 
-    </main>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+    integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="/uploads/src/public/eventView.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
-      integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script src="/uploads/src/public/eventView.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
-  </body>
+  <!-- 차트 추가,0605 조예진 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const socket = io();
+      var chartArea = document.getElementById('eventChart').getContext('2d');
+      var remainCount = parseInt(document.getElementById('remain_count').getAttribute('data-remain-count'));
+      var remainOrigin = parseInt(document.getElementById('remain_origin').getAttribute('data-remain-origin'));
+
+      var myChart = new Chart(chartArea, {
+        type: 'pie',
+        data: {
+          labels: ['잔여 수량', '사용된 수량'],
+          datasets: [{
+            label: '수량',
+            data: [remainCount, remainOrigin - remainCount],
+            backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+            borderColor: ['rgba(0, 0, 255, 1)', 'rgba(255, 0, 0, 1)'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top'
+            }
+          }
+        }
+      });
+
+      socket.on('updateEvent', function(data) {
+        var eventId = '<%= eventInfo[0].id %>';
+        if (data.id == eventId) {
+          document.getElementById('remain_count').innerText = data.remain_count;
+          myChart.data.datasets[0].data[0] = data.remain_count;
+          myChart.data.datasets[0].data[1] = remainOrigin - data.remain_count;
+          myChart.update();
+        }
+      });
+    });
+  </script>
+</body>
 </html>
