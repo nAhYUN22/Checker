@@ -83,18 +83,6 @@ app.get('/api/events', (req, res) => {
     });
 });
 
-// 특정 이벤트 정보 API
-app.get('/api/events/:id', (req, res) => {
-    const data = readData();
-    const eventId = parseInt(req.params.id);
-    const event = data.find(event => event.id === eventId);
-
-    if (event) {
-        res.json(event); // 이벤트 데이터 응답
-    } else {
-        res.status(404).json({ message: 'Event not found' }); // 이벤트를 찾을 수 없는 경우
-    }
-});
 
 // 이벤트 추가 API
 app.post('/api/events', upload.single('image'), async (req, res) => {
@@ -110,6 +98,8 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
         id: data.length + 1,
         name: req.body.name,
         num: req.body.num,
+        eventHashFlag: req.body.eventHashFlag,
+        modifyFlag: req.body.modifyFlag,
         progress: req.body.progress === 'true',
         content: req.body.content,
         duedate: req.body.duedate,
@@ -117,27 +107,51 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
         studentList: req.body.studentList.split(','),
         options: options
     };
+    if (newEvent['modifyFlag'] == 1) {
+        let makeStudentform = ""
+        newEvent['studentList'].forEach(student => {
+            makeStudentform += `name="${student.replace(" ", "")}" OR `;
+        });
+        makeStudentform = makeStudentform.slice(0, -4);
+
+        let studentInfoResult = await checkerDB.sendQuery(`SELECT * FROM checker.student WHERE ${makeStudentform}`)
+
+        // 이벤트 수정 쿼리
+        checkerDB.sendQuery(`UPDATE checker.events SET event_name="${newEvent['name']}", event_image_url="${newEvent['image']}", event_status=${newEvent['progress']}, event_date="${newEvent['duedate']}", remain_count=${newEvent['num']}, remain_origin=${newEvent['num']} WHERE event_hash="${newEvent['eventHashFlag']}"`);
+
+        // // 이벤트 옵션 수정 쿼리
+        checkerDB.sendQuery(`UPDATE checker.event_additional_info SET options='${JSON.stringify(newEvent['options'])}' WHERE event_hash="${newEvent['eventHashFlag']}";`);
+
+        // 학생 참여정보 테이블 수정
+        studentInfoResult.forEach(student => {
+            checkerDB.sendQuery(`INSERT IGNORE INTO checker.participation_info (student_id, student_name, student_pic, participation, event_hash, enrolled, fee, receiveFlag) VALUES ('${student['student_id']}', '${student['name']}', '${student['pic']}', '${newEvent['name']}', '${newEvent['eventHashFlag']}', ${student['enrolled']}, ${student['fee']}, 0);`);
+        })
 
 
-    let makeStudentform = ""
-    newEvent['studentList'].forEach(student => {
-        makeStudentform += `name="${student.replace(" ", "")}" OR `;
-    });
-    makeStudentform = makeStudentform.slice(0, -4);
 
-    let studentInfoResult = await checkerDB.sendQuery(`SELECT * FROM checker.student WHERE ${makeStudentform}`)
+    } else {
+        console.log("첫 등록이요~");
+        let makeStudentform = ""
+        newEvent['studentList'].forEach(student => {
+            makeStudentform += `name="${student.replace(" ", "")}" OR `;
+        });
+        makeStudentform = makeStudentform.slice(0, -4);
 
-    let eventHash = crypto.createHash('sha256').update(newEvent['name'] + newEvent['content'] + newEvent['duedate']).digest('hex');
-    // 이벤트 등록 쿼리
-    checkerDB.sendQuery(`INSERT INTO checker.events (event_name, event_hash, event_image_url, event_content, event_status, event_date, remain_count, remain_origin) VALUES ("${newEvent['name']}", "${eventHash}", "${newEvent['image']}", "${newEvent['content']}", ${newEvent['progress']}, "${newEvent['duedate']}", "${newEvent['num']}", "${newEvent['num']}");`);
+        let studentInfoResult = await checkerDB.sendQuery(`SELECT * FROM checker.student WHERE ${makeStudentform}`)
 
-    // // 이벤트 옵션 등록 쿼리
-    checkerDB.sendQuery(`INSERT INTO checker.event_additional_info (event_hash, options) VALUES ('${eventHash}', '${JSON.stringify(newEvent['options'])}');`);
+        let eventHash = crypto.createHash('sha256').update(newEvent['name'] + newEvent['content'] + newEvent['duedate']).digest('hex');
+        // 이벤트 등록 쿼리
+        checkerDB.sendQuery(`INSERT INTO checker.events (event_name, event_hash, event_image_url, event_content, event_status, event_date, remain_count, remain_origin) VALUES ("${newEvent['name']}", "${eventHash}", "${newEvent['image']}", "${newEvent['content']}", ${newEvent['progress']}, "${newEvent['duedate']}", "${newEvent['num']}", "${newEvent['num']}");`);
 
-    // 학생 참여정보 테이블 등록
-    studentInfoResult.forEach(student => {
-        checkerDB.sendQuery(`INSERT INTO checker.participation_info (student_id, student_name, student_pic, participation, event_hash, enrolled, fee) VALUES ('${student['student_id']}', '${student['name']}', '${student['pic']}', '${newEvent['name']}', '${eventHash}', ${student['enrolled']}, ${student['fee']});`);
-    })
+        // // 이벤트 옵션 등록 쿼리
+        checkerDB.sendQuery(`INSERT INTO checker.event_additional_info (event_hash, options) VALUES ('${eventHash}', '${JSON.stringify(newEvent['options'])}');`);
+
+        // 학생 참여정보 테이블 등록
+        studentInfoResult.forEach(student => {
+            checkerDB.sendQuery(`INSERT INTO checker.participation_info (student_id, student_name, student_pic, participation, event_hash, enrolled, fee, receiveFlag) VALUES ('${student['student_id']}', '${student['name']}', '${student['pic']}', '${newEvent['name']}', '${eventHash}', ${student['enrolled']}, ${student['fee']}, 0);`);
+        })
+    }
+
 
 });
 
@@ -252,10 +266,15 @@ app.post('/api/eventListView', async (req, res) => {
 })
 
 app.post('/api/getParticipationInfo', async (req, res) => {
-    let userList = await checkerDB.sendQuery(`SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info b ON a.event_hash = b.event_hash INNER JOIN checker.participation_info WHERE a.event_hash="${req.body.event_hash}" AND enrolled=1 AND fee=1;`);
+    let userList = await checkerDB.sendQuery(`    SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info b ON a.event_hash = b.event_hash INNER JOIN checker.participation_info c ON a.event_hash= c.event_hash WHERE b.event_hash="${req.body.event_hash}" AND enrolled=1 AND fee=1;`);
+
+
+    console.log(`SELECT DISTINCT * FROM checker.events a INNER JOIN checker.event_additional_info b ON a.event_hash = b.event_hash INNER JOIN checker.participation_info WHERE a.event_hash="${req.body.event_hash}" AND enrolled=1 AND fee=1;`);
 
     res.json(userList);
 })
+
+
 
 
 app.post('/api/userList', async (req, res) => {
@@ -281,7 +300,56 @@ app.get('/eventView/:eventHash', async (req, res) => {
     res.render('eventView.ejs', { eventInfo: userList });
 });
 
+// 갯수 카운팅 하기
 
+app.post('/api/increaseEventRemain', async (req, res) => {
+    let response = await checkerDB.sendQuery(`SELECT remain_count FROM checker.events WHERE event_hash="${req.body.eventHash}";`);
+    let resJson = response[0];
+
+    let remain_count = resJson['remain_count'] * 1;
+    remain_count = remain_count + 1;
+
+    let result = await checkerDB.sendQuery(`UPDATE checker.events SET remain_count=${remain_count} WHERE event_hash="${req.body.eventHash}";`);
+
+    res.json(result);
+});
+
+app.post('/api/decreaseEventRemain', async (req, res) => {
+    let response = await checkerDB.sendQuery(`SELECT remain_count FROM checker.events WHERE event_hash="${req.body.eventHash}";`);
+    let resJson = response[0];
+
+    let remain_count = resJson['remain_count'] * 1;
+    remain_count = remain_count - 1;
+
+
+    let result = await checkerDB.sendQuery(`UPDATE checker.events SET remain_count=${remain_count} WHERE event_hash="${req.body.eventHash}";`);
+
+    res.json(result);
+});
+
+// 유저 수령 상태 변경
+app.post('/api/updateUser', async (req, res) => {
+
+
+    let result;
+    if (req.body.statusType == 1) {
+        result = await checkerDB.sendQuery(`UPDATE checker.participation_info SET receiveFlag=0 WHERE student_id="${req.body.userID}" AND event_hash="${req.body.eventHash}";`);
+    }
+    else {
+        result = await checkerDB.sendQuery(`UPDATE checker.participation_info SET receiveFlag=1 WHERE student_id="${req.body.userID}" AND event_hash="${req.body.eventHash}";`);
+    }
+
+    // res.json(result);
+});
+
+
+app.post('/api/getEventStudentList', async (req, res) => {
+    result = await checkerDB.sendQuery(`SELECT * FROM checker.participation_info WHERE event_hash='${req.body.eventHash}';`);
+
+    res.json(result);
+});
+
+// 갯수 카운팅 하기
 
 
 app.get('/', async (req, res) => {

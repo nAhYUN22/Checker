@@ -5,6 +5,8 @@ const eventList = document.getElementById('event-list');
 const searchBar = document.getElementById('search-bar');
 const addOptionButton = document.getElementById('add-option');
 const optionsContainer = document.getElementById('options-container');
+const modifyFlag = document.getElementById('modifyFlag');
+const eventHashFlag = document.getElementById('eventHashFlag');
 let page = 1;
 const limit = 10;
 let editingEventId = null;
@@ -65,7 +67,7 @@ const loadFirst = async () => {
                 "event_hash": event['event_hash']
             })
         });
-    
+
         let studentList = await studentResponse.json();
 
         const eventItem = document.createElement('li');
@@ -76,12 +78,14 @@ const loadFirst = async () => {
         studentList.forEach(student => {
             studentMaker += `
             <div class="student">
+                
                 <div class="hoverInfo">
                     <div class="content">
                         <img src="/uploads/src/studentPic/${student['student_pic']}" class="studentPic" />
                     </div>
                 </div>
                 <div class="stuInfo">
+                        <input class="studentCheckedBox" type="checkbox" id="coding" name="checked" value="1" ${student['receiveFlag'] ? "checked" : ""}  />
                     <p class="studnetId">학번 : ${student['student_id']}</p>
                     <p class="studentName">이름 : ${student['student_name']}</p>
                 </div>
@@ -98,7 +102,7 @@ const loadFirst = async () => {
         eventItem.innerHTML = `
             <h2>${event['event_name']}</h2>
             <div class="infoLine">
-                <p>이벤트 Hash<br> ${event['event_hash']}</p>
+                <p class="eventHash">이벤트 Hash<br> ${event['event_hash']}</p>
                 <p>Progress: ${event['event_status'] ? '활성화' : '비활성화'}</p>
                 <p>종료일: ${new Date(event['event_date']).toLocaleString()}</p>
             </div>
@@ -114,14 +118,81 @@ const loadFirst = async () => {
     });
 
 
-    
+    setTimeout(() => {
+        document.querySelectorAll('.studentCheckedBox').forEach(box => {
+            box.addEventListener('click', async (e) => {
+                let parentDOM = e.target.parentElement.parentElement.parentElement.parentElement;
+                const eventHash = parentDOM.querySelector('.infoLine > p:nth-child(1)').innerText.split("\n")[1];
+                let userIDInfo = e.target.parentElement.querySelector('.studnetId').innerText.split(":")[1].replace(" ", "")
+
+                if (e.target.checked) {
+                    let result = await fetch("/api/decreaseEventRemain", {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "eventHash": eventHash
+                        })
+                    })
+
+                    // 여기서 체크박스 업데이트
+
+                    await fetch("/api/updateUser", {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "eventHash": eventHash,
+                            "userID": userIDInfo,
+                            "statusType": 0
+                        })
+                    })
+
+
+                } else {
+                    let result = await fetch("/api/increaseEventRemain", {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "eventHash": eventHash
+                        })
+                    })
+
+                    // 여기서 체크박스 업데이트
+                    await fetch("/api/updateUser", {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "eventHash": eventHash,
+                            "userID": userIDInfo,
+                            "statusType": 1
+                        })
+                    })
+
+                }
+            })
+        })
+    }, 500)
+
+
+
 
 }
 
 
 // 이벤트 목록 만들기
 const eventUpdate = async (data) => {
-    
+
     let eventList = document.querySelector('#section2 > .container > .contentLine > #event-list');
     eventList.replaceChildren();
 
@@ -140,7 +211,7 @@ const eventUpdate = async (data) => {
                 "event_hash": event['event_hash']
             })
         });
-    
+
         let studentList = await studentResponse.json();
 
         const eventItem = document.createElement('li');
@@ -190,7 +261,20 @@ const eventUpdate = async (data) => {
 
 
 
-    
+    document.querySelectorAll('.studentCheckedBox').forEach(box => {
+        console.log(box);
+        box.addEventListener('click', async (event) => {
+            console.log(event.target.parentElement);
+            // let response = await fetch(url, {
+            //     method: "POST",
+            //     body: JSON.stringify({
+            //         "adsf": 
+            //     })
+            // })
+        })
+    })
+
+
 
 }
 
@@ -220,8 +304,11 @@ const editEvent = async (eventHash) => {
 
     let jsonResult = await response.json();
     jsonResult = jsonResult[0];
+    console.log(jsonResult);
 
     if (jsonResult) {
+        modifyFlag.value = 1;
+        eventHashFlag.value = jsonResult['event_hash'];
         console.log(new Date(jsonResult['event_date']).toISOString());
         document.getElementById('event-num').value = jsonResult['remain_origin'];
         document.getElementById('event-name').value = jsonResult['event_name'];
@@ -229,7 +316,30 @@ const editEvent = async (eventHash) => {
         document.getElementById('event-content').value = jsonResult['event_content'];
         document.getElementById('event-duedate').value = new Date(jsonResult['event_date']).toISOString().substring(0, 16);
         // 학생 목록 업데이트 하기
-        // document.getElementById('event-studentList').jsonResult = event.studentList.join(', ');
+
+        // fetch로 가져오고 리스팅해주기
+
+        let studentListGet = await fetch("/api/getEventStudentList", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "eventHash": eventHash })
+        })
+
+        let resultJson = await studentListGet.json();
+
+        let userListForm = "";
+        resultJson.forEach((student) => {
+            userListForm += `${student['student_name']}, `;
+        })
+        userListForm = userListForm.slice(0, -2);
+
+
+
+        document.querySelector('#event-studentList').value = userListForm;
+
 
         document.querySelector('#section1 > .container > .contentLine > .imgBox > .imgLine > img').src = jsonResult['event_image_url'];
 
@@ -247,6 +357,7 @@ const editEvent = async (eventHash) => {
 // 이벤트 폼 제출 이벤트 핸들러
 eventForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    console.log(eventForm);
     const formData = new FormData(eventForm);
 
     // 체크박스의 값을 true/false로 설정
@@ -265,8 +376,8 @@ eventForm.addEventListener('submit', async (event) => {
     }
     formData.append('options', JSON.stringify(options)); // JSON 문자열로 변환하여 추가
 
-    const url = editingEventId ? `/api/events/${editingEventId}` : '/api/events';
-    const method = editingEventId ? 'PUT' : 'POST';
+    const url = '/api/events';
+    const method = 'POST';
     const response = await fetch(url, {
         method,
         body: formData

@@ -238,7 +238,8 @@ main > .topBox > p {
   margin: 0;
   font-size: 70px;
   font-weight: 700;
-  text-shadow: 1px 3px 4px #ffffff69;
+  text-shadow: 1px 3px 4px #000000e3;
+  color: white;
 }
 /* ==== section1 ==== */
 
@@ -350,27 +351,101 @@ main > .topBox > p {
 @media all and (max-width: 1024px) {
 }
 /* 작업 후 834까지 */
-@media all and (max-width: 767px) {
-  .popupWrapper {
-    left: calc(50% - 100px) !important;
+@media all and (max-width: 834px) {
+  section {
+    width: 100%;
+  }
+  #section1 > .container {
+    padding: 0;
   }
 }
 /* 작업 후 600까지 */
-@media all and (max-width: 479px) {
-  .popupWrapper {
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+@media all and (max-width: 600px) {
+  img {
+    vertical-align: bottom;
+  }
+  #section1 > .container {
+    height: auto;
+  }
+  #section1 > .container > .contentLine > .textLine > p {
+    font-size: 55px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo > .tBox > div {
+    width: 75px;
+    height: 90px;
+  }
+  #section2 > .container > .contentLine > .timeLine {
+    gap: 2rem;
   }
 }
 /* 작업 후 478까지 */
-@media all and (max-width: 390px) {
+@media all and (max-width: 478px) {
+  main > .topBox > p {
+    font-size: 22px;
+  }
+  #section1 {
+    margin-top: 56px;
+  }
   .popupWrapper {
     width: 360px !important;
   }
+  #section1 > .container > .contentLine > .textLine > p {
+    font-size: 45px;
+    text-align: center;
+  }
+  #section2 > .container > .contentLine > .timeLine > .tLine > p {
+    font-size: 33px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo > .tBox > div {
+    width: 69px;
+    height: 83px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo > .tBox > div > p {
+    font-size: 36px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo {
+    gap: 1rem;
+  }
+  #section2 > .container > .contentLine > .timeLine {
+    gap: 1rem;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo > .tBox > p {
+    font-size: 26px;
+  }
+  #section2 > .container > .contentLine > .optional > p {
+    font-size: 26px;
+  }
+  #section2 > .container > .contentLine > .eventContent > p {
+    font-size: 21px;
+  }
 }
 /* 작업 후 414까지 */
-@media all and (max-width: 320px) {
+@media all and (max-width: 414px) {
+  #section1 > .container > .contentLine > .textLine > p {
+    font-size: 37px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .tLine {
+    margin-top: 30px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo > .tBox > div {
+    width: 59px;
+    height: 79px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo > .tBox > div > p {
+    font-size: 32px;
+  }
+  #section2 > .container > .contentLine > .timeLine > .timeInfo > .tBox > p {
+    font-size: 23px;
+  }
+  #section2 > .container > .contentLine > .optional > p {
+    margin-top: 30px;
+  }
+  .chartContainer {
+    width: 80%;
+  }
+  #section2 > .container > .contentLine > .eventContent > p {
+    font-size: 19px;
+  }
 }
 
 /* ===== media ===== */

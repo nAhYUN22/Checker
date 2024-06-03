@@ -269,3 +269,988 @@ Emitted 'error' event on Connection instance at:
 }
 
 Node.js v18.19.1
+Server is running on http://localhost:5000
+[
+  RowDataPacket {
+    event_name: 'asdfasd',
+    event_hash: '4cff4f5bd2c5cb817eac01b591f8ba5531ee3ef9084c46ab4197c3f81c61fa5b',
+    event_image_url: '/uploads/1717353157102-1.jpg',
+    event_content: 'fasdfasdf',
+    event_status: 1,
+    event_date: 2024-06-02T18:34:00.000Z,
+    remain_count: 55,
+    remain_origin: 55,
+    options: '[{"items": ["fasdfasd"], "category": "asdfasd"}]'
+  }
+]
+Server is running on http://localhost:5000
+첫 등록이요~
+node:internal/process/promises:288
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+Error: ER_DATA_TOO_LONG: Data too long for column 'event_content' at row 1
+    at Sequence._packetToError (/CHECKER/workdir/Checker/node_modules/mysql/lib/protocol/sequences/Sequence.js:47:14)
+    at Query.ErrorPacket (/CHECKER/workdir/Checker/node_modules/mysql/lib/protocol/sequences/Query.js:79:18)
+    at Protocol._parsePacket (/CHECKER/workdir/Checker/node_modules/mysql/lib/protocol/Protocol.js:291:23)
+    at Parser._parsePacket (/CHECKER/workdir/Checker/node_modules/mysql/lib/protocol/Parser.js:433:10)
+    at Parser.write (/CHECKER/workdir/Checker/node_modules/mysql/lib/protocol/Parser.js:43:10)
+    at Protocol.write (/CHECKER/workdir/Checker/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/CHECKER/workdir/Checker/node_modules/mysql/lib/Connection.js:88:28)
+    at Socket.<anonymous> (/CHECKER/workdir/Checker/node_modules/mysql/lib/Connection.js:526:10)
+    at Socket.emit (node:events:517:28)
+    at addChunk (node:internal/streams/readable:368:12)
+    --------------------
+    at Protocol._enqueue (/CHECKER/workdir/Checker/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at Connection.query (/CHECKER/workdir/Checker/node_modules/mysql/lib/Connection.js:198:25)
+    at /CHECKER/workdir/Checker/lib/db.js:16:29
+    at new Promise (<anonymous>)
+    at db.sendQuery (/CHECKER/workdir/Checker/lib/db.js:15:16)
+    at /CHECKER/workdir/Checker/app.js:144:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  code: 'ER_DATA_TOO_LONG',
+  errno: 1406,
+  sqlMessage: "Data too long for column 'event_content' at row 1",
+  sqlState: '22001',
+  index: 0,
+  sql: 'INSERT INTO checker.events (event_name, event_hash, event_image_url, event_content, event_status, event_date, remain_count, remain_origin) VALUES ("잘 찍었지", "b6c4e2778d4de1908c1fa52559d68fd4e98a04687a595d3c0449f922847ac6d8", "/uploads/1717402181595-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg", "그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ", true, "2024-06-06T17:00", "20", "20");'
+}
+
+Node.js v18.19.1
+Server is running on http://localhost:5000
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '간식 사업',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717401996906-á\x84\x8Cá\x85µá\x86«á\x84\x80á\x85µá\x84\x86á\x85§á\x86¼á\x84\x80á\x85µ.gif',
+    event_content: '맛있겠다',
+    event_status: 1,
+    event_date: 2024-06-04T14:04:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]
+[
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '6886e8d6580536aa833dafa9e95b7eecbf682a81dceeea1e21e6646fa3f5d0e4',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  },
+  RowDataPacket {
+    event_name: '잘 찍었지',
+    event_hash: '874f318028381912221e054b040d1f2b9fbb50335f9edfadfe4ad8f45c0fec45',
+    event_image_url: '/uploads/1717402428395-KakaoTalk_Photo_2024-04-24-16-13-37 003jpeg.jpeg',
+    event_content: '그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? 그치? ',
+    event_status: 1,
+    event_date: 2024-07-11T08:16:00.000Z,
+    remain_count: 19,
+    remain_origin: 20,
+    options: '[{"items": ["테스트"], "category": "테스트"}]'
+  }
+]

@@ -529,29 +529,40 @@ main > .topBox > .right > p:hover {
 }
 
 #section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .hoverInfo {
+  width: 300px;
   opacity: 0;
   z-index: -1;
-  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
   transition: all 0.3s;
-  padding: 10px;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.533);
+  user-select: none;
 }
-#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .hoverInfo > img {
-  width: 200px;
-}
-
 #section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student:hover > .hoverInfo {
   opacity: 1;
-  z-index: 11;
+  z-index: 99;
 }
+
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .hoverInfo > .content {
+  width: 100%;
+}
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .hoverInfo > .content > img {
+  width: 100%;
+}
+
+
 
 
 #section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .stuInfo {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-evenly;
   width: 100%;
+}
+#section2 > .container > .contentLine > #event-list > .event-item > .studentList > .student > .stuInfo > input {
+  margin-right: -120px;
 }
 
 #section2 > .container > .contentLine > #event-list > .event-item > button {

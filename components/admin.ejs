@@ -35,6 +35,8 @@
                     </div>
                     <div class="formLine">
                         <form id="event-form" enctype="multipart/form-data">
+                            <input type="hidden" name="eventHashFlag" id="eventHashFlag">
+                            <input type="hidden" name="modifyFlag" id="modifyFlag" value="0">
                             <input type="hidden" name="id" id="event-id" required>
                             <input type="number" name="num" id="event-num" placeholder="잔여수량 설정" required>
                             <input type="text" name="name" id="event-name" placeholder="이벤트 명" required>

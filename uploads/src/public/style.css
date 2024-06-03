@@ -319,27 +319,57 @@ main > .topBox > p {
 @media all and (max-width: 1024px) {
 }
 /* 작업 후 834까지 */
-@media all and (max-width: 767px) {
-  .popupWrapper {
-    left: calc(50% - 100px) !important;
+@media all and (max-width: 834px) {
+  section {
+    width: 100%;
   }
 }
 /* 작업 후 600까지 */
-@media all and (max-width: 479px) {
-  .popupWrapper {
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+@media all and (max-width: 600px) {
+  #section1 > .container > .contentLine > .boxList > .box {
+    width: 320px;
+    height: 280px;
+  }
+  #section1 > .container > .contentLine > .boxList > .box > .boxContent > .top {
+    width: 310px;
+    height: 150px;
+  }
+  #section1 > .container {
+    padding-bottom: 150px;
   }
 }
 /* 작업 후 478까지 */
-@media all and (max-width: 390px) {
-  .popupWrapper {
-    width: 360px !important;
+@media all and (max-width: 478px) {
+  main > .topBox > p {
+    font-size: 23px;
+  }
+  #section1 > .container > .contentLine > .boxList > .box {
+    width: 270px;
+    height: 270px;
+  }
+  #section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom {
+    width: 90%;
   }
 }
 /* 작업 후 414까지 */
-@media all and (max-width: 320px) {
+@media all and (max-width: 414px) {
+  #section1 > .container > .contentLine > .boxList > .box {
+    width: 220px;
+    height: 250px;
+  }
+  #section1 > .container > .contentLine > .boxList > .box > .boxContent > .top {
+    width: 250px;
+    height: 115px;
+  }
+  #section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .topLine > p.eName {
+    font-size: 17px;
+  }
+  #section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .topLine > p.dateTime {
+    font-size: 13px;
+  }
+  #section1 > .container > .contentLine > .boxList > .box > .boxContent > .bottom > .bottomLine > .contentPreview > p {
+    font-size: 15px;
+  }
 }
 
 /* ===== media ===== */
