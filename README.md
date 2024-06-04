@@ -1,6 +1,6 @@
 # 데이터베이스 8조 - CHECKer
 
-![checker](/uploads/src/)
+![checker](/uploads/src/checkerog.png)
 
 ## 조원
 
