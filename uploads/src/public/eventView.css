@@ -168,7 +168,8 @@ main > .topBox {
 main > .topBox.sticky {
     background-color: #2a64add9;
     padding: 18px 0;
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
 }
 main > .topBox > p {
     font-family: 'AJou';
@@ -198,7 +199,10 @@ main > .topBox > p {
 #section1 > .container > .contentLine > .bgdLine {
     width: 100%;
     transition: all 1s;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 #section1 > .container > .contentLine > .bgdLine::before {
     content: "";
@@ -214,7 +218,8 @@ main > .topBox > p {
 }
 
 #section1 > .container > .contentLine > .bgdLine.blured::before{
-    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
 }
 #section1 > .container > .contentLine > .bgdLine > img {
     width: 100%;

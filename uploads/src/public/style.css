@@ -167,7 +167,8 @@ main > .topBox {
 main > .topBox.sticky {
     background-color: #2a64add9;
     padding: 18px 0;
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
 }
 main > .topBox > p {
     font-family: 'AJou';
